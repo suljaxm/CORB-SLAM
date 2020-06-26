@@ -20,14 +20,14 @@ The CORB-SLAM system consists of multiple ORB_SLAM2 clients for local mapping an
 ## 1. Prerequisites
 
 ### 1.0 requirements
-  * ubuntu 14.04
-  * ROS indigo
-  * ORBSLAM2 1.0.0
+  * ubuntu 14.04/16.04
+  * ROS indigo/kinetic
+  * ORBSLAM2
   * boost
 
 ### 1.1 ROS install
 
-Inatall ROS indigo according to the instructions in [ROS wiki](http://wiki.ros.org/indigo/Installation).
+Inatall ROS kinetic according to the instructions in [ROS wiki](http://wiki.ros.org/indigo/Installation).
 
 ### 1.2 ORBSLAM2 and its dependencies
 
@@ -36,18 +36,17 @@ Our CORB-SLAM system is build on the foundation of [ORB_SLAM2(https://github.com
 ### 1.3 Boost library install
 We use boost library to serialize and deserialize the data.
 We can install boost library using the following instruction in terminal.
+
 ```bash
-sudo apt-get instal libboost-dev
+sudo apt-get install libboost-all-dev
 ```
 
 
 ### 2.1 build CORB-SLAM
 
-The CORB-SLAM runs as the ROS package. and the CORB-SLAM *src* directory should be the ROS package directory, *catkin_src/*.
-We use catkin tool to organize the CORB-SLAM packages, corbslam_client and corbslam_servcer.
-
-Terminal in the *catkin_src/* directory.
 ```
+cd CORB-SLAM/src/corbslam_client/Thirdparty/DBoW2
+mkdir build && cmake .. && make
 catkin_make
 catkin_install
 ```

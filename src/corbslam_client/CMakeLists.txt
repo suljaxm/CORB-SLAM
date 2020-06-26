@@ -40,7 +40,13 @@ find_package(catkin REQUIRED COMPONENTS
         tf
         )
 
-find_package(OpenCV 2.4.3 REQUIRED)
+find_package(OpenCV 3.0 QUIET)
+if(NOT OpenCV_FOUND)
+   find_package(OpenCV 2.4.3 QUIET)
+   if(NOT OpenCV_FOUND)
+      message(FATAL_ERROR "OpenCV > 2.4.3 not found.")
+   endif()
+endif()
 find_package(Eigen3 3.1.0 REQUIRED)
 find_package(Pangolin REQUIRED)
 
@@ -156,7 +162,7 @@ include_directories(
         ${Pangolin_INCLUDE_DIRS}
         ${Boost_INCLUDE_DIR}
         ${PROJECT_SOURCE_DIR}/Examples/RGB-D
-        /usr/local/include/pcl-1.8
+        /usr/include/pcl-1.7
 )
 
 ## Declare a C++ library
@@ -194,7 +200,8 @@ add_library(${PROJECT_NAME} SHARED
         include/SerializeObject.h
         include/DataDriver.h
         src/DataDriver.cc
-        include/TransPose.h src/TransPose.cpp)
+        include/TransPose.h 
+        src/TransPose.cpp)
 
 target_link_libraries(${PROJECT_NAME}
         ${OpenCV_LIBS}
